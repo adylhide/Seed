@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Step1Goal from '../components/Step1Goal';
-import Step2Milestones from '../components/Step2Milestones';
-import Step3Strategy from '../components/Step3Strategy';
-import Step4Dashboard from '../components/Step4Dashboard';
+import Step1Goal from '../src/components/Step1Goal';
+import Step2Milestones from '../src/components/Step2Milestones';
+import Step3Strategy from '../src/components/Step3Strategy';
+import Step4Dashboard from '../src/components/Step4Dashboard';
 import type { ProjectData } from './types';
 
 export default function App() {
