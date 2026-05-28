@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useMemo } from 'react';
-import type { ProjectData } from '../../src/types';
+import type { ProjectData } from '../types';
 
 interface Step1Props {
   data: ProjectData;

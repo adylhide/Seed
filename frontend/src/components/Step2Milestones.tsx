@@ -1,6 +1,6 @@
-import type { StepPropsWithBack } from '../../src/types';
+import type { ProjectData } from '../types';
 
-export default function Step2Milestones({ data, setData, onNext, onBack }: StepPropsWithBack) {
+export default function Step2Milestones({ data, setData, onNext, onBack }: { data: ProjectData; setData: (data: ProjectData) => void; onNext: () => void; onBack: () => void }) {
   const handleEdit = (idx: number, val: string) => {
     const fresh = [...data.milestones];
     fresh[idx] = val;
