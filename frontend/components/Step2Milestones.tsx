@@ -1,4 +1,4 @@
-import type { StepPropsWithBack } from '../src/types';
+import type { StepPropsWithBack } from '../../src/types';
 
 export default function Step2Milestones({ data, setData, onNext, onBack }: StepPropsWithBack) {
   const handleEdit = (idx: number, val: string) => {

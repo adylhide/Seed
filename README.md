@@ -1,75 +1,53 @@
-# React + TypeScript + Vite
+# seedling. 🌱
+> A premium, minimalist local TypeScript sandbox pipeline for dynamic project blueprinting, dynamic AI strategy formulation, and interactive ecosystem milestone tracking.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Designed for fluid prototyping with React, TypeScript, Tailwind CSS, and Node.js, `seedling.` acts as an elegant workspace for conceptualizing ideas, establishing milestone tracks, fetching structured AI advisory frameworks, and visualizing operational progress in real-time.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🏗️ Architecture & Pipeline Matrix
 
-## React Compiler
+The application is structured linearly across four distinct development phases to guarantee focus, eliminate mental overhead, and structure operational execution:
+1. **Phase 01 (Goal & Intention Blueprint):** Define the fundamental scope, primary intentions, and operational description parameters of your initiative.
+2. **Phase 02 (Linear Checklist Sequencing):** Map out an explicit three-tier sequential path of operational milestone targets.
+3. **Phase 03 (AI Strategy Matrix Formulation):** Query a local backend node integrated directly with Gemini's AI execution core to generate dual, high-impact strategic vectors (`Velocity` vs. `Safeguard`).
+4. **Phase 04 (Interactive Ecosystem Command Dashboard):** Manage live execution parameters, log progress via interactive milestone checkpoints, check metrics via glassmorphic yield meters, and view an integrated real-time ecosystem visualizer (`ThreeSeedling`).
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
+## 🛡️ Key Features & Recent Optimizations
 
-## Expanding the ESLint configuration
+### ⚡ Screen-Aware Auto-Unlock Mechanism (`Step3Strategy`)
+* Built a dynamic layout intersection observer inside the strategic overlay modal.
+* **Smart Behavior:** If a user views the modal on a high-resolution display or the returned text is short enough to fit inside the viewport without triggering standard container vertical overflows, the modal skips the strict scrolling validation check, instantly flipping the button to **Accept Strategy ✓** and freeing up user workflow transitions.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🌫️ Clear Frosted Glass Visualizer Contexts
+* Stripped away the muddy green overlay tints and standard gray background overlays (`bg-slate-900/50`) across all high-priority modal views.
+* Implemented a pristine `bg-transparent backdrop-blur-md` overlay configuration that leaves underlying dashboard components fully visible but beautifully diffused under an un-tinted glassmorphic pane.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🏆 Milestone Completion Celebration Overlay (`Step4Dashboard`)
+* Created a full-screen, screen-spanning celebratory modal card that activates precisely when the ecosystem maturity hits **100%**.
+* Uses an asynchronous state execution loop (`setTimeout` gates) to decouple complex multi-state changes out of continuous React layout calculations, resolving cascading synchronization linter bugs completely.
+* Includes custom floating CSS popper keyframe animations (`🎉`, `✨`, `🌱`) that float upward alongside a smoothly rotating golden trophy emblem.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🔧 Safe AI Sandbox Node Constructor Initialization (`backend/server.js`)
+* Configured the latest modular `@google/genai` integration node accurately by passing a dedicated instantiation configuration parameter wrapper `{}` to prevent structural object linter property crashes during operational startups.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📂 File Layout & Core Source Architecture
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+```text
+├── backend/
+│   ├── .env                 # Environment secrets storage (GEMINI_API_KEY)
+│   └── server.js            # Express API router node handling Gemini structured content queries
+├── src/
+│   ├── components/
+│   │   ├── Step1Goal.tsx        # Goal initialization pane
+│   │   ├── Step2Milestones.tsx  # Linear checkpoint builder
+│   │   ├── Step3Strategy.tsx    # Screen-aware AI strategy review engine & popup layout
+│   │   ├── Step4Dashboard.tsx   # Glassmorphic tracking console & achievement celebration layer
+│   │   └── ThreeSeedling.tsx    # Dedicated Ecosystem progress visualization node
+│   ├── App.tsx              # Main orchestrator managing global step indices & canvas state purges
+│   ├── index.css            # Custom CSS animation keyframes and global utilities
+│   └── types.ts             # Strict TypeScript payload structural interface parameters
