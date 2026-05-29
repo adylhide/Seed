@@ -6,7 +6,7 @@ import { GoogleGenAI } from '@google/genai';
 dotenv.config();
 
 const app = express();
-const genAI = new GoogleGenAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 app.use(cors());
 app.use(express.json());
@@ -22,13 +22,6 @@ app.post('/api/generate-strategy', async (req, res) => {
     const projectTitle = title.trim();
     const projectDesc = description?.trim() || "No detailed parameters mapped.";
     const projectMilestones = Array.isArray(milestones) ? milestones.filter(Boolean).join(', ') : "General exploration paths.";
-
-    const model = genAI.getGenerativeModel({ 
-      model: 'gemini-1.5-flash',
-      generationConfig: {
-        responseMimeType: 'application/json'
-      }
-    });
 
     const prompt = `You are an expert project strategy planner. Analyze this project objective:
     Title: ${projectTitle}
@@ -49,15 +42,21 @@ app.post('/api/generate-strategy', async (req, res) => {
       }
     }`;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const responseText = response.text();
+    const response = await genAI.models.generateContent({
+      model: 'gemini-2.0-flash',
+      contents: prompt,
+      config: {
+        responseMimeType: 'application/json'
+      }
+    });
+
+    const responseText = response.text;
     const cleanJsonData = JSON.parse(responseText);
     
     res.json(cleanJsonData);
   } catch (error) {
-    console.error("Pipeline failure on AI strategy module:", error);
-    res.status(500).json({ error: "Internal Core Execution Node Exception." });
+    console.error("PIPELINE ERROR DETAILS:", error);
+    res.status(500).json({ error: "Internal Core Execution Node Exception.", details: error.message });
   }
 });
 

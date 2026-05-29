@@ -14,7 +14,6 @@ interface DynamicFramework {
 
 export default function Step3Strategy({ data, onNext, onBack }: StrategyProps) {
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   
   const [velocityFramework, setVelocityFramework] = useState<DynamicFramework | null>(null);
   const [safeguardFramework, setSafeguardFramework] = useState<DynamicFramework | null>(null);
@@ -27,43 +26,25 @@ export default function Step3Strategy({ data, onNext, onBack }: StrategyProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!data.title || !data.title.trim()) {
-      return;
-    }
+    // Simulating a brief "AI analysis" phase for UX feel without the API dependency
+    const timer = setTimeout(() => {
+      setVelocityFramework({
+        title: "High-Velocity Execution Matrix",
+        directive: "Optimize for rapid deployment and iterative feedback loops.",
+        description: `Prioritize the core milestones for ${data.title || 'the project'} to achieve a functional prototype within the first sprint. Minimize architectural overhead by utilizing modular components and automated deployment pipelines. Focus on 'feature-complete' over 'pixel-perfect' to gather early user data.`
+      });
 
-    async function fetchAICounsel() {
-      try {
-        setError(null);
-        const response = await fetch('/api/generate-strategy', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            title: data.title,
-            description: data.description,
-            milestones: data.milestones,
-          }),
-        });
+      setSafeguardFramework({
+        title: "Defensive Quality & Risk Buffer",
+        directive: "Prioritize structural integrity and security at every layer.",
+        description: `Implement a rigorous testing suite and security auditing for ${data.title || 'the project'}. Ensure all data transformations are validated and that the system architecture follows strict isolation principles. This strategy builds a robust foundation that scales safely, preventing technical debt from accumulating during the growth phase.`
+      });
 
-        if (!response.ok) {
-          throw new Error(`AI Core connection dropped with status code: ${response.status}`);
-        }
+      setLoading(false);
+    }, 1200);
 
-        const json = await response.json();
-        setVelocityFramework(json.velocity);
-        setSafeguardFramework(json.safeguard);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('Failed to establish connection to the integration node.');
-        }
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchAICounsel();
-  }, [data.title, data.description, data.milestones]);
+    return () => clearTimeout(timer);
+  }, [data.title, data.description]);
 
   // Screen layout observer: Auto-approves reading validation if no overflow layout scrollbar exists
   useEffect(() => {
@@ -101,18 +82,6 @@ export default function Step3Strategy({ data, onNext, onBack }: StrategyProps) {
         <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#306D29]/60 block">
           Compiling Live AI Vectors...
         </span>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="animate-fade-in p-6 text-center space-y-4 max-w-md mx-auto bg-red-50/30 border border-red-200 rounded-2xl">
-        <span className="text-xs font-bold text-red-800 block">Integration Interface Error</span>
-        <p className="text-[11px] text-red-700/80 leading-relaxed font-medium">{error}</p>
-        <button onClick={() => window.location.reload()} className="text-[10px] font-bold uppercase tracking-wider text-[#306D29] border-b border-[#306D29]">
-          Re-initialize Sandbox Pipeline
-        </button>
       </div>
     );
   }

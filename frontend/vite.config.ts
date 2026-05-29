@@ -11,7 +11,6 @@ export default defineConfig({
     babel({ presets: [reactCompilerPreset()] }),
   ],
   build: {
-    // @ts-ignore - Assuming environment supports Rolldown options as requested
     rolldownOptions: {
       output: {
         codeSplitting: true,
