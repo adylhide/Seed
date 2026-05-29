@@ -33,7 +33,7 @@ export default function Step4Dashboard({ data, setData, onBack }: DashboardProps
       const token = setTimeout(() => {
         setShowCongratulatoryModal(true);
         setHasTriggeredCongratz(true);
-      }, 0);
+      }, 20000); // FIXED: 20-second delay as requested
       return () => clearTimeout(token);
     } else if (pct < 100 && hasTriggeredCongratz) {
       const token = setTimeout(() => {
