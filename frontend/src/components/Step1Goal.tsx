@@ -98,7 +98,7 @@ export default function Step1Goal({ data, setData, onNext }: Step1Props) {
                 placeholder="Why must this exist? State its value in one deep breath..."
                 value={data.description}
                 onChange={handleDescriptionChange}
-                className="w-full text-xs font-medium text-[#306D29]/80 bg-white/50 border border-[#306D29]/20 rounded-xl px-4 py-3 placeholder-[#306D29]/30 focus:outline-none focus:border-[#306D29] focus:bg-white/80 transition-all resize-none overflow-hidden min-h-[96px] leading-relaxed"
+                className="w-full text-xs font-medium text-[#306D29]/80 bg-white/50 border border-[#306D29]/20 rounded-xl px-4 py-3 placeholder-[#306D29]/30 focus:outline-none focus:border-[#306D29] focus:bg-white/80 transition-all resize-none overflow-hidden min-h-[24] leading-relaxed"
               />
             </div>
           </div>

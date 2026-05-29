@@ -4,7 +4,7 @@
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
     "module": "esnext",
-    "types": ["vite/client"],
+    "types": [],
     "typeRoots": ["./node_modules/@types"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -24,27 +24,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "exclude": ["node_modules", "dist"],
-  "ts-node": {
-    "esm": true,
-    "swc": true
-  },
-  "eslint": {
-    "enable": true,
-    "files": ["src/**/*.{ts,tsx}"]
-  },
-  "prettier": {
-    "enable": true,
-    "files": ["src/**/*.{ts,tsx}"]
-  },
-  "stylelint": {
-    "enable": true,
-    "files": ["src/**/*.{css,less,scss}"]
-  },
-  "cspell": {
-    "enable": true,
-    "files": ["src/**/*.{ts,tsx,css,less,scss}"]
-  }
+  "include": ["src"]
 }

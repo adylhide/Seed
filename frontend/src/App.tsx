@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import Step1Goal from '../src/components/Step1Goal';
 import Step2Milestones from '../src/components/Step2Milestones';
+import Step3Strategy from '../src/components/Step3Strategy';
 import Step4Dashboard from '../src/components/Step4Dashboard';
 import type { ProjectData } from './types';
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState<number>(1);
   // A unique key that we bump whenever we want a 100% decontaminated slate
+  const [resetCounter, setResetCounter] = useState<number>(0);
 
   const [projectData, setProjectData] = useState<ProjectData>({
     title: '',
@@ -29,6 +31,7 @@ export default function App() {
         completedAt: [null, null, null]
       });
       setCurrentStep(1);
+      setResetCounter(prev => prev + 1); // Bumping this forces a total refresh of child components
     }
   };
 
@@ -58,7 +61,16 @@ export default function App() {
       <main className="grow flex flex-col justify-center">
         {currentStep === 1 && <Step1Goal data={projectData} setData={setProjectData} onNext={() => setCurrentStep(2)} />}
         {currentStep === 2 && <Step2Milestones data={projectData} setData={setProjectData} onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />}
-       
+        
+        {/* ADDING THE key PROP HERE AUTOMATICALLY KILLS OLD CACHED DATA COALESCING */}
+        {currentStep === 3 && (
+          <Step3Strategy 
+            key={`strategy-core-${resetCounter}`} 
+            data={projectData} 
+            onNext={() => setCurrentStep(4)} 
+            onBack={() => setCurrentStep(2)} 
+          />
+        )}
         
         {currentStep === 4 && <Step4Dashboard data={projectData} setData={setProjectData} onBack={() => setCurrentStep(3)} />}
       </main>
