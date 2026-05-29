@@ -6,8 +6,7 @@ import { GoogleGenAI } from '@google/genai';
 dotenv.config();
 
 const app = express();
-// FIX: Passing the configuration object prevents the project/location TypeError crash
-const ai = new GoogleGenAI({});
+const genAI = new GoogleGenAI(process.env.GEMINI_API_KEY);
 
 app.use(cors());
 app.use(express.json());
@@ -23,6 +22,13 @@ app.post('/api/generate-strategy', async (req, res) => {
     const projectTitle = title.trim();
     const projectDesc = description?.trim() || "No detailed parameters mapped.";
     const projectMilestones = Array.isArray(milestones) ? milestones.filter(Boolean).join(', ') : "General exploration paths.";
+
+    const model = genAI.getGenerativeModel({ 
+      model: 'gemini-1.5-flash',
+      generationConfig: {
+        responseMimeType: 'application/json'
+      }
+    });
 
     const prompt = `You are an expert project strategy planner. Analyze this project objective:
     Title: ${projectTitle}
@@ -43,15 +49,9 @@ app.post('/api/generate-strategy', async (req, res) => {
       }
     }`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json'
-      }
-    });
-
-    const responseText = response.text;
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const responseText = response.text();
     const cleanJsonData = JSON.parse(responseText);
     
     res.json(cleanJsonData);

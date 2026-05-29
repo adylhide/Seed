@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import Step1Goal from '../src/components/Step1Goal';
-import Step2Milestones from '../src/components/Step2Milestones';
-import Step3Strategy from '../src/components/Step3Strategy';
-import Step4Dashboard from '../src/components/Step4Dashboard';
+import { useState, lazy, Suspense } from 'react';
+const Step1Goal = lazy(() => import('./components/Step1Goal'));
+const Step2Milestones = lazy(() => import('./components/Step2Milestones'));
+const Step3Strategy = lazy(() => import('./components/Step3Strategy'));
+const Step4Dashboard = lazy(() => import('./components/Step4Dashboard'));
 import type { ProjectData } from './types';
 
 export default function App() {
@@ -59,20 +59,22 @@ export default function App() {
       </header>
 
       <main className="grow flex flex-col justify-center">
-        {currentStep === 1 && <Step1Goal data={projectData} setData={setProjectData} onNext={() => setCurrentStep(2)} />}
-        {currentStep === 2 && <Step2Milestones data={projectData} setData={setProjectData} onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />}
-        
-        {/* ADDING THE key PROP HERE AUTOMATICALLY KILLS OLD CACHED DATA COALESCING */}
-        {currentStep === 3 && (
-          <Step3Strategy 
-            key={`strategy-core-${resetCounter}`} 
-            data={projectData} 
-            onNext={() => setCurrentStep(4)} 
-            onBack={() => setCurrentStep(2)} 
-          />
-        )}
-        
-        {currentStep === 4 && <Step4Dashboard data={projectData} setData={setProjectData} onBack={() => setCurrentStep(3)} />}
+        <Suspense fallback={<div className="flex justify-center p-12 opacity-50 text-[10px] uppercase tracking-widest">Initialising Core...</div>}>
+          {currentStep === 1 && <Step1Goal data={projectData} setData={setProjectData} onNext={() => setCurrentStep(2)} />}
+          {currentStep === 2 && <Step2Milestones data={projectData} setData={setProjectData} onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />}
+          
+          {/* ADDING THE key PROP HERE AUTOMATICALLY KILLS OLD CACHED DATA COALESCING */}
+          {currentStep === 3 && (
+            <Step3Strategy 
+              key={`strategy-core-${resetCounter}`} 
+              data={projectData} 
+              onNext={() => setCurrentStep(4)} 
+              onBack={() => setCurrentStep(2)} 
+            />
+          )}
+          
+          {currentStep === 4 && <Step4Dashboard data={projectData} setData={setProjectData} onBack={() => setCurrentStep(3)} />}
+        </Suspense>
       </main>
 
       <footer className="mt-12 pt-6 border-t border-[#E7E1B1] flex justify-between items-center text-[10px] uppercase tracking-wider opacity-40">
